@@ -100,3 +100,24 @@ PICKLE_SAFE = {
   'graphite.intervals': set(['Interval', 'IntervalSet']),
 }
 ```
+
+## Getting the First Launch Data
+
+The first launch data is a special case where we conformed to a logging format
+that didn't include absolute time information about the data points since the
+first version of our telemetry system was running on an Arduino Micro, which has
+no system clock. To get this data into your Graphite backend, ensure Carbon is
+running and the Graphite Web App and then follow these steps:
+
+
+1. `sudo add-apt-repository ppa:chris-lea/node.js`
+2. `sudo apt-get update`
+3. `sudo apt-get install python-software-properties python g++ make nodejs`
+4. `sudo npm install -g coffee-script`
+5. `git clone git@github.com:hapsis/First-Launch.git` where desired.
+6. `cd First-Launch`
+7. `./migrate.sh`
+
+You can ensure the data got into Graphite, if, when you visit the web
+interface, you can see the tree path `/Graphite/event/0` with the metrics
+under that folder.
