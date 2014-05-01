@@ -5,3 +5,8 @@ step-by-step instructions to getting our stack running on Ubuntu.
 
 In the future, there will likely be a script that automates the setup
 process.
+
+# Dependencies
+
+* [Graphite](http://graphite.wikidot.com/)
+* [Graph Explorer](https://github.com/vimeo/graph-explorer)
