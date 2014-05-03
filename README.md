@@ -9,7 +9,7 @@ process.
 # High-Level Dependencies
 
 * [Graphite](http://graphite.wikidot.com/)
-* [Graph Explorer](https://github.com/vimeo/graph-explorer)
+* [Grafana](https://github.com/grafana/grafana)
 
 # Setup
 
@@ -121,3 +121,18 @@ running and the Graphite Web App and then follow these steps:
 You can ensure the data got into Graphite, if, when you visit the web
 interface, you can see the tree path `/Graphite/event/0` with the metrics
 under that folder.
+
+## Grafana
+
+We use Grafana as a better UI Layer to sit on top of Graphite.
+
+1. `sudo add-apt-repository ppa:webupd8team/java`
+2. `sudo apt-get update`
+3. `sudo apt-get install oracle-java7-installer`
+4. Download and install the ElasticSearch `.deb` file from
+[here](http://www.elasticsearch.org/download/).
+5. Copy the configuration files found in `conf/elasticsearch` or this repository
+to `/etc/elasticsearch`.
+6. `sudo service elasticsearch start`
+7. Ensure elasticsearch is running properly by directing your browser to
+`http://localhost:9200`. You should seem some JSON.
