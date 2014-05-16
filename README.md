@@ -124,7 +124,9 @@ under that folder.
 
 ## Grafana
 
-We use Grafana as a better UI Layer to sit on top of Graphite.
+We use Grafana as a better UI Layer to sit on top of Graphite. It requires
+elasticsearch and Nginx (or your choice alternative to software to serve
+Grafana).
 
 1. `sudo add-apt-repository ppa:webupd8team/java`
 2. `sudo apt-get update`
@@ -136,3 +138,23 @@ to `/etc/elasticsearch`.
 6. `sudo service elasticsearch start`
 7. Ensure elasticsearch is running properly by directing your browser to
 `http://localhost:9200`. You should seem some JSON.
+8. Get the latest version of Grafana [here](http://grafana.org/download/).
+9. Unpack the file and keep note of where the `src` directory in this package
+lives on your machine (you will need this path for Nginx).
+10. Replace `confg.sample.js` in the Grafana `src` directory with the config
+found in this repo at `conf/grafana/config.js`.
+11. `sudo apt-get install nginx`
+12. `sudo service nginx start`
+13. Ensure Nginx has started by going to the IP address ouptutted by
+`ifconfig eth0 | grep inet | awk '{ print $2 }'`.
+14. Nginx should already be set up to run at startup, but run
+`update-rc.d nginx defaults` for good measure.
+15. Add the Nginx configuration file found in this repo at `conf/nginx/metior` to
+`/etc/nginx/sites-available`.
+16. Remove any other configuration files in `/etc/nginx/sites-available` as well
+as their corresponding symlinks in `/etc/nginx/sites-enabled`.
+17. `ln -s /etc/nginx/sites-available/metior /etc/nginx/sites-enabled/metior`
+18. Replace all instances of <PATH_TO_GRAFANA> in the metior Nginx configuration
+file with the path to Grafana on your system.
+19. `sudo service nginx restart`
+20. Check `localhost` and ensure that Grafana is running.
