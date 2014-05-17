@@ -21,7 +21,7 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server ipv6only=on;
 
-	root /home/vinay/Desktop/Hapsis/grafana-1.5.4/src;
+	root <PATH_TO_GRAFANA>;
 	index index.html index.htm;
 
 	# Make site accessible from http://localhost/

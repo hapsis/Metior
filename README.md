@@ -122,6 +122,31 @@ You can ensure the data got into Graphite, if, when you visit the web
 interface, you can see the tree path `/Graphite/event/0` with the metrics
 under that folder.
 
+## Serving Graphite with Nginx and uWSGI
+
+Because we will need to enable
+[CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) when serving
+Graphite so that Grafana may access the Graphite API from another port, we will
+serve Graphite from Nginx. This section is inspired by [this gist from
+drawks](https://gist.github.com/drawks/1830579).
+
+1. `sudo apt-get install nginx`
+2. `sudo service nginx start`
+3. Ensure Nginx has started by going to the IP address ouptutted by
+`ifconfig eth0 | grep inet | awk '{ print $2 }'`.
+4. Nginx should already be set up to run at startup, but run
+`update-rc.d nginx defaults` for good measure.
+5. Remove any other configuration files in `/etc/nginx/sites-available` as well
+as their corresponding symlinks in `/etc/nginx/sites-enabled`.
+6. Copy `conf/nginx/graphite` found in this repo to `/etc/nginx/sites-available`.
+7. `sudo ln -s /etc/nginx/sites-available/graphite /etc/nginx/sites-enabled/graphite`
+8. `sudo pip install uwsgi`
+9. Copy `conf/uwsgi/graphite.ini` found in this repo to
+`/etc/uwsgi/apps-available`.
+10. `sudo ln -s /etc/uwsgi/apps-available/graphite.ini /etc/uwsgi/apps-enabled/graphite.ini`
+11. Update the previous alias you made for `graphite-web` to be:
+`alias graphite-web='uwsgi --ini /etc/uwsgi/apps-enabled/graphite.ini'`
+
 ## Grafana
 
 We use Grafana as a better UI Layer to sit on top of Graphite. It requires
@@ -143,18 +168,10 @@ to `/etc/elasticsearch`.
 lives on your machine (you will need this path for Nginx).
 10. Replace `confg.sample.js` in the Grafana `src` directory with the config
 found in this repo at `conf/grafana/config.js`.
-11. `sudo apt-get install nginx`
-12. `sudo service nginx start`
-13. Ensure Nginx has started by going to the IP address ouptutted by
-`ifconfig eth0 | grep inet | awk '{ print $2 }'`.
-14. Nginx should already be set up to run at startup, but run
-`update-rc.d nginx defaults` for good measure.
-15. Add the Nginx configuration file found in this repo at `conf/nginx/metior` to
+11. Add the Nginx configuration file found in this repo at `conf/nginx/metior` to
 `/etc/nginx/sites-available`.
-16. Remove any other configuration files in `/etc/nginx/sites-available` as well
-as their corresponding symlinks in `/etc/nginx/sites-enabled`.
-17. `ln -s /etc/nginx/sites-available/metior /etc/nginx/sites-enabled/metior`
-18. Replace all instances of <PATH_TO_GRAFANA> in the metior Nginx configuration
+12. `sudo ln -s /etc/nginx/sites-available/metior /etc/nginx/sites-enabled/metior`
+13. Replace all instances of <PATH_TO_GRAFANA> in the metior Nginx configuration
 file with the path to Grafana on your system.
-19. `sudo service nginx restart`
-20. Check `localhost` and ensure that Grafana is running.
+14. `sudo service nginx restart`
+15. Check `localhost` and ensure that Grafana is running.

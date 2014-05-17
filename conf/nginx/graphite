@@ -1,0 +1,24 @@
+upstream django {
+	ip_hash;
+	server unix:/tmp/uwsgi.sock;
+}
+
+server {
+	listen 8080;
+	server_name graphite;
+	charset utf-8;
+
+	location /content/ {
+		alias /opt/graphite/webapp/content/;
+	}
+
+	location / {
+		add_header 'Access-Control-Allow-Origin' '*';
+		add_header 'Access-Control-Allow-Credentials' 'true';
+		add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';
+		add_header 'Access-Control-Allow-Headers' 'origin, authorization, accept';
+
+		uwsgi_pass django;
+		include uwsgi_params;
+	}
+}
