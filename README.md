@@ -6,10 +6,18 @@ step-by-step instructions to getting our stack running on Ubuntu.
 In the future, there will likely be a script that automates the setup
 process.
 
-# High-Level Dependencies
+# Dependencies
 
-* [Graphite](http://graphite.wikidot.com/)
+## Primary
+
+* [Graphite](http://graphite.wikidot.com)
 * [Grafana](https://github.com/grafana/grafana)
+
+## Ancillary
+
+* [Nginx](http://nginx.org)
+* [uWSGI](http://projects.unbit.it/uwsgi)
+* [elasticsearch](http://elasticsearch.org)
 
 # Setup
 
