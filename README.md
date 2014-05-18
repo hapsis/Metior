@@ -49,11 +49,11 @@ these instructions at your own risk.
 10. `sudo pip install graphite-web`
 11. `sudo chown -R $(whoami):staff /opt/graphite`
 12. Override `carbon.conf` found in `/opt/graphite/conf` with the
-`conf/carbon.conf` file found in this repo.
+`conf/graphite/carbon.conf` file found in this repo.
 13. Override `storage-schemas.conf` found in `/opt/graphite/conf` with
-`conf/storage-schemas.conf` found in this repo.
+`conf/graphite/storage-schemas.conf` found in this repo.
 14. Override `local_settings.py` found in `/opt/graphite/webapp/graphite` with
-`conf/local_settings.py` found in this repo.
+`conf/graphite/local_settings.py` found in this repo.
 15. `sudo cp -r /opt/graphite/lib/carbon* /usr/local/lib/python2.7/dist-packages/`
 16. `sudo cp /opt/graphite/lib/twisted/plugins/* /usr/local/lib/python2.7/dist-packages/twisted/plugins/`
 Points 15 & 16 assume you are running python2.7 and that you are on a Debian
