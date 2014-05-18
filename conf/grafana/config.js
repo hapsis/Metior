@@ -42,7 +42,7 @@ function (Settings) {
 
      */
 
-    default_route: '/dashboard/file/default.json',
+    default_route: '/dashboard/file/metior.json',
 
     /**
      * If you experiance problems with zoom, it is probably caused by timezone diff between

@@ -168,10 +168,12 @@ to `/etc/elasticsearch`.
 lives on your machine (you will need this path for Nginx).
 10. Replace `confg.sample.js` in the Grafana `src` directory with the config
 found in this repo at `conf/grafana/config.js`.
-11. Add the Nginx configuration file found in this repo at `conf/nginx/metior` to
+11. Copy `conf/grafana/metior.json` found in this repo to `app/dashboards` in
+the `src` folder of the Grafana repo.
+12. Add the Nginx configuration file found in this repo at `conf/nginx/metior` to
 `/etc/nginx/sites-available`.
-12. `sudo ln -s /etc/nginx/sites-available/metior /etc/nginx/sites-enabled/metior`
-13. Replace all instances of <PATH_TO_GRAFANA> in the metior Nginx configuration
+13. `sudo ln -s /etc/nginx/sites-available/metior /etc/nginx/sites-enabled/metior`
+14. Replace all instances of <PATH_TO_GRAFANA> in the metior Nginx configuration
 file with the path to Grafana on your system.
-14. `sudo service nginx restart`
-15. Check `localhost` and ensure that Grafana is running.
+15. `sudo service nginx restart`
+16. Check `localhost` and ensure that Grafana is running.
